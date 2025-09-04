@@ -8,7 +8,10 @@ import {
   FiUser,
   FiShoppingCart,
   FiHeart,
-
+  FiClock,
+  FiCheckCircle,
+  FiUsers,
+  FiUserCheck,
 } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import useCurrentUserRole from "../../hooks/useCurrentUserRole";
@@ -23,6 +26,36 @@ function Sidebar() {
 
   const navLink = [
     {
+      name: "Pending",
+      slug: "/admin/pending",
+      active: authStatus && userRole === "admin",
+      icon: <FiClock />,
+    },
+    {
+      name: "Approved",
+      slug: "/admin/approved",
+      active: authStatus && userRole === "admin",
+      icon: <FiCheckCircle />,
+    },
+    {
+      name: "Rejected",
+      slug: "/admin/rejected",
+      active: authStatus && userRole === "admin",
+      icon: <FiCheckCircle />,
+    },
+    {
+      name: "Customers",
+      slug: "/admin/customers",
+      active: authStatus && userRole === "admin",
+      icon: <FiUsers />,
+    },
+    {
+      name: "Sellers",
+      slug: "/admin/sellers",
+      active: authStatus && userRole === "admin",
+      icon: <FiUserCheck />,
+    },
+    {
       name: "Seller Dashboard",
       slug: "/seller/dashboard",
       active: authStatus && userRole === "seller",
@@ -30,21 +63,15 @@ function Sidebar() {
     },
     {
       name: "Manage Products",
-      slug: "/seller/products",
+      slug: "/seller/products/all",
       active: authStatus && userRole === "seller",
       icon: <FiGrid />,
     },
     {
-      name: "My Store",
-      slug: "/seller/store",
+      name: "Rejected Products",
+      slug: "/seller/products/rejected",
       active: authStatus && userRole === "seller",
       icon: <FiShoppingBag />,
-    },
-    {
-      name: "Start Selling",
-      slug: "/seller/start",
-      active: authStatus && userRole === "seller",
-      icon: <FiPlusCircle />,
     },
     {
       name: "Seller Panel",
@@ -95,7 +122,7 @@ function Sidebar() {
       icon: <FiUser />,
     },
   ];
-  
+
   return (
     <>
       <div className="text-purple-600 font-bold text-2xl">🍽</div>
@@ -113,7 +140,7 @@ function Sidebar() {
               }
             >
               <span>{item.icon}</span>
-              <span className="relative ">
+              <span className="relative hidden md:block">
                 {item.name}
 
                 {item.name === "Cart" && cartFoods.length > 0 && (

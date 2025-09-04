@@ -5,15 +5,11 @@ const Footer = () => {
   return (
     <footer className="bg-[#D6EAF8] text-[#2C3E50]  py-6 w-full text-cente">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Logo */}
           <div className="flex items-center space-x-2">
            <GiCampCookingPot size={40} />
             <span className="text-lg font-semibold">YourBite</span>
           </div>
-
-          {/* Links Section */}
           <div className="flex flex-wrap justify-center md:justify-between w-full md:w-auto mt-4 md:mt-0">
             <div className="px-4">
               <h3 className="text-sm font-semibold uppercase">Resources</h3>
@@ -57,8 +53,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom Section */}
         <div className="mt-6 border-t border-gray-700 pt-4 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm">&copy; 2012 mPratap13™. All Rights Reserved.</p>
           <div className="flex space-x-4 mt-2 md:mt-0">

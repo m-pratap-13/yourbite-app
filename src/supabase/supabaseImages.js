@@ -3,7 +3,7 @@ import supabase from "./supabaseClient";
 export class ImagesService {
   async createImageURL(image, userId) {
     if (image) {
-      const fileExt = image.name.split(".").pop();
+      const fileExt = image.name?.split(".").pop();
       const fileName = `${userId}.${fileExt}`;
       const filePath = `${Date.now()}-${fileName}`;
 

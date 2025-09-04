@@ -10,7 +10,10 @@ function useFetchCategoryFoods(categoryName) {
     const fetchCatFoods = async () => {
       try {
         const data = await productService.getCategoryProducts(categoryName);
-        setCategoryFoods(data);
+        const activeItems = (data || []).filter(
+          (item) => item.active && item.admin_approval
+        );
+        setCategoryFoods(activeItems);
       } catch (err) {
         console.error("Error fetching userRole:", err);
         setError(err);

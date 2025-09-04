@@ -1,5 +1,5 @@
 import React from "react";
-import NewUserGuide from "../componenets/Main/NewUserGuide";
+import NewUserGuide from "../components/Main/NewUserGuide";
 
 function WithoutLoginPage() {
   const userCategories = [

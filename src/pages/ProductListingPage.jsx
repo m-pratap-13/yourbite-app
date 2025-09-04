@@ -1,5 +1,5 @@
 import React from "react";
-import ProductListingForm from "../componenets/Main/ProductListingForm";
+import ProductListingForm from "../components/Main/ProductListingForm";
 
 function ProductListingPage() {
   return (

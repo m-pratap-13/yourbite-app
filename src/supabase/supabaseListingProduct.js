@@ -14,6 +14,8 @@ export class ProductService {
     images,
     ingredients,
     sellerId,
+    active,
+    adminApproval,
   }) {
     const foodImageUrl = await imagesService.createImageURL(images);
     try {
@@ -30,6 +32,9 @@ export class ProductService {
           images: foodImageUrl,
           ingredients: [ingredients],
           seller_id: sellerId,
+          active: active,
+          admin_approval: adminApproval,
+          admin_id: "71c6c97a-540a-4338-8782-a9daabdf6ffc",
         },
       ]);
 
@@ -61,12 +66,12 @@ export class ProductService {
   async getAllProducts() {
     try {
       const { data, error } = await supabase.from("foods").select(`
-    *,
-    users (
-      *
-    )
-  `);
-      return data;
+        *,
+         users!foods_seller_id_fkey(*) (
+          *
+        )
+      `);
+      return data || [];
     } catch (error) {
       console.log("Supabase service :: getPosts :: error", error);
       return [];
@@ -79,7 +84,7 @@ export class ProductService {
       .select(
         `
     *,
-    users (
+     users!foods_seller_id_fkey(*) (
       *
     )
   `
@@ -151,6 +156,69 @@ export class ProductService {
     }
 
     return data;
+  }
+
+  async getSellerFoods(userId) {
+    const { data, error } = await supabase
+      .from(`foods`)
+      .select("*")
+      .eq("seller_id", userId);
+
+    if (error) {
+      console.error("Supabase getSellerFoods error:", error.message);
+      throw error;
+    }
+
+    return data;
+  }
+
+  async updateFood(foodId, updatedData) {
+    try {
+      const { data, error } = await supabase
+        .from("foods")
+        .update(updatedData)
+        .eq("id", foodId)
+        .select();
+
+      if (error) {
+        console.error("Error updating food:", error.message);
+        return { error };
+      }
+
+      return { data };
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      return { error: err };
+    }
+  }
+
+  async updateStatus(foodId, status, columnName) {
+    try {
+      const { data, error } = await supabase
+        .from("foods")
+        .update({ [columnName]: status })
+        .eq("id", foodId)
+        .select();
+
+      if (error) {
+        console.error("Error updating food:", error.message);
+        return { error };
+      }
+
+      return { data };
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      return { error: err };
+    }
+  }
+
+  async deleteFoodItem(foodId) {
+    const { error } = await supabase.from("foods").delete().eq("id", foodId);
+
+    if (error) {
+      console.error("Supabase deleteFoodItem error:", error.message);
+      throw error;
+    }
   }
 }
 

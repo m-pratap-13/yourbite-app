@@ -154,25 +154,20 @@ const SellerSignUpForm = () => {
                 })}
                 className="mt-1 w-full border px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-green-300"
               >
-                <option value="">Select</option>
-                <option value="Biriyani">Biriyani</option>
-                <option value="Curry">Curry</option>
-                <option value="Paneer">Paneer</option>
-                <option value="Fried Rice">Fried Rice</option>
-                <option value="Chowmein">Chowmein</option>
-                <option value="Momos">Momos</option>
+                <option value="">Select Category</option>
+                <option value="Biryani">Biryani</option>
                 <option value="Pizza">Pizza</option>
-                <option value="Pasta">Pasta</option>
                 <option value="Burger">Burger</option>
-                <option value="Sandwich">Sandwich</option>
-                <option value="Dosa">Dosa</option>
-                <option value="Idli">Idli</option>
-                <option value="Samosa">Samosa</option>
-                <option value="Sweets">Sweets</option>
+                <option value="Pasta">Pasta</option>
+                <option value="Momos">Momos</option>
+                <option value="Sandwiches">Sandwiches</option>
+                <option value="Desserts">Desserts</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Bengali">Bengali</option>
               </select>
-              {errors.typeOfFood && (
+              {errors.category && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.typeOfFood.message}
+                  {errors.category.message}
                 </p>
               )}
             </div>

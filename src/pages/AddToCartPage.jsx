@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import useFetchCartFoods from "../hooks/useFetchCartFoods";
-import CartItem from "../componenets/Main/CartItem";
 import productService from "../supabase/supabaseListingProduct";
-import CartPrice from "../componenets/Main/CartPrice";
-import EmptyResult from "../componenets/Home/EmptyResult";
+import CartPrice from "../components/Main/CartPrice";
+import EmptyResult from "../components/Home/EmptyResult";
 import { FaCartPlus } from "react-icons/fa";
+import ItemCard from "../components/Main/ItemCard";
 
 function AddToCartPage() {
   const userId = useSelector((state) => state.auth.currentUser).id;
@@ -28,15 +28,18 @@ function AddToCartPage() {
     <div className="flex flex-col gap-4 lg:flex-row">
       <div className="flex gap-2 flex-col lg:w-[60%]">
         {cartFoods.map((food) => (
-          <CartItem
+          <ItemCard
             key={food.foods.id}
             title={food.foods.title}
+            description={food.foods.description}
             shipping={food.foods.shippingInformation}
+            category={food.foods.category}
             price={food.foods.price}
             type={food.foods.type}
             stock={food.foods.stock}
             imageURL={food.foods.images}
-            removeCart={() => handleRemoveFromCart(food.foods.id)}
+            onRejected={() => handleRemoveFromCart(food.foods.id)}
+            pageType='addToCart'
           />
         ))}
       </div>

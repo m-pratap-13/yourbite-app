@@ -27,6 +27,7 @@ function useFetchCartFoods(userId) {
     cartFoods,
     loading,
     error,
+    refresh,
     refreshCart: () => setRefresh((p) => p + 1),
   };
 }

@@ -10,12 +10,15 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import SellerSignUpPage from "./pages/SellerSignUpPage.jsx";
 import ProductListingPage from "./pages/ProductListingPage.jsx";
-import FoodShop from "./componenets/Home/FoodShop.jsx";
-import FoodItem from "./componenets/Home/FoodItem.jsx";
+import FoodShop from "./components/Home/FoodShop.jsx";
+import FoodItem from "./components/Home/FoodItem.jsx";
 import AddToCartPage from "./pages/AddToCartPage.jsx";
 import CategoryPage from "./pages/CategoryPage.jsx";
-import SellerDashboard from "./pages/SellerDashboard.jsx";
 import SingleFoodPage from "./pages/SingleFoodPage.jsx";
+import SellerDashboardPage from "./pages/SellerDashboardPage.jsx";
+import ManageProductsPage from "./pages/ManageProductsPage.jsx";
+import UpdatePage from "./pages/UpdatePage.jsx";
+import AdminReviewPage from "./pages/admin/AdminReviewPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +55,19 @@ const router = createBrowserRouter([
           },
           {
             path: "/seller/dashboard",
-            element: <SellerDashboard />,
+            element: <SellerDashboardPage />,
+          },
+          {
+            path: "/seller/products/:pageType",
+            element: <ManageProductsPage />,
+          },
+          {
+            path: "/update/foodId/:foodId",
+            element: <UpdatePage />,
+          },
+          {
+            path: "/admin/:pageType",
+            element: <AdminReviewPage />,
           },
         ],
       },

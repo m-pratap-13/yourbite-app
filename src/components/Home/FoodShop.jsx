@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 import CategoriesOptions from "./CategoriesOptions";
 
 function FoodShop() {
-  const { sellers, loading, error } = useFetchAllSeller();
+  const { sellers, loading } = useFetchAllSeller();
   const user = useSelector((state) => state.auth.currentUser);
   const { userRole } = useCurrentUserRole(user?.id);
 
@@ -31,7 +31,7 @@ function FoodShop() {
             openingHour={seller.openingHour}
             name={seller.restaurantName}
             restaurantType={seller.restaurantType}
-            typeOfFood={seller.typeOfFood}
+            typeOfFood={seller.category}
             location={seller.address}
           />
         ))}

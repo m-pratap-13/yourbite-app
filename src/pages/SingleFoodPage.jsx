@@ -1,18 +1,15 @@
 import useSingleFood from "../hooks/useSingleFood";
 import { useParams } from "react-router-dom";
 import { FaStore, FaMapMarkerAlt } from "react-icons/fa";
-import AddToCartButton from "../componenets/Main/AddToCartButton";
+import AddToCartButton from "../components/Main/AddToCartButton";
 import { CiMail } from "react-icons/ci";
 
 export default function SingleFoodPage() {
   const { foodId } = useParams();
   const { food } = useSingleFood(foodId);
 
-  console.log(food);
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-4 md:p-8">
-      {/* Food Section */}
       <div className="w-full max-w-5xl bg-white shadow-lg rounded-2xl p-6 md:flex gap-6">
         <img
           src={food.images}

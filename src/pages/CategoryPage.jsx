@@ -1,12 +1,12 @@
-import Card from "../componenets/Main/Card";
+import Card from "../components/Main/Card";
 import useFetchCategoryFoods from "../hooks/useFetchCategoryFoods";
 import { useParams } from "react-router-dom";
-import EmptyResult from "../componenets/Home/EmptyResult";
+import EmptyResult from "../components/Home/EmptyResult";
 import { TbMoodLookUp } from "react-icons/tb";
 import useCurrentUserRole from "../hooks/useCurrentUserRole";
 import { useSelector } from "react-redux";
-import SearchBar from "../componenets/Home/SearchBar";
-import CategoriesOptions from "../componenets/Home/CategoriesOptions";
+import SearchBar from "../components/Home/SearchBar";
+import CategoriesOptions from "../components/Home/CategoriesOptions";
 
 function CategoryPage() {
   const { categoryName } = useParams();

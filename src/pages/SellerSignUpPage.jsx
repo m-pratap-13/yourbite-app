@@ -1,5 +1,5 @@
 import React from "react";
-import SellerSignUpForm from "../componenets/Header/SellerSignUpForm";
+import SellerSignUpForm from "../components/Header/SellerSignUpForm";
 
 function SellerSignUpPage() {
   return (

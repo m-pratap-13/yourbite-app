@@ -4,21 +4,26 @@ import LoadingPage from "../../pages/LoadingPage";
 import EmptyResult from "./EmptyResult";
 import { useSelector } from "react-redux";
 import useCurrentUserRole from "../../hooks/useCurrentUserRole";
-import useCartFoodsId from "../../hooks/useCartFoodsId";
 import SearchBar from "./SearchBar";
 import CategoriesOptions from "./CategoriesOptions";
+import { BsFillQuestionOctagonFill } from "react-icons/bs";
 
 function FoodItem() {
-  const { foods, loading } = useFetchAllFoodItems();
   const user = useSelector((state) => state.auth.currentUser);
   const { userRole } = useCurrentUserRole(user?.id);
+  const { foods, loading } = useFetchAllFoodItems();
 
   if (loading) {
     return <LoadingPage />;
   }
 
   if (foods.length === 0) {
-    return <EmptyResult message="No food found !" />;
+    return (
+      <EmptyResult
+        icon={<BsFillQuestionOctagonFill size={30} />}
+        message="No food found !"
+      />
+    );
   }
   return (
     <>

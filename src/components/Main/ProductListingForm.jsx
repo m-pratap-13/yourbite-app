@@ -2,29 +2,72 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import productService from "../../supabase/supabaseListingProduct";
+import { useEffect, useState } from "react";
+import imagesService from "../../supabase/supabaseImages";
 
-export default function ProductListingForm() {
-
+export default function ProductListingForm({ food }) {
   const sellerId = useSelector((state) => state.auth.currentUser.id);
   const navigate = useNavigate();
+  const [inputType, setInputType] = useState("text");
 
+  const handleImagesUpdate = () => {
+    setInputType((prev) => (prev === "text" ? "file" : "text"));
+  };
+
+  console.log();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    if (food) {
+      setValue("title", food.title || "");
+      setValue("description", food.description || "");
+      setValue("category", food.category || "");
+      setValue("price", food.price || "");
+      setValue("stock", food.stock || "");
+      setValue("shippingInformation", food.shippingInformation || "");
+      setValue("availabilityStatus", food.availabilityStatus || "");
+      setValue("type", food.type || "");
+      setValue("ingredients", food?.ingredients?.[0] || "");
+      setValue("images", food.images || "");
+    }
+  }, [food, setValue]);
+
+  useEffect(() => {
+    if (food) {
+      setValue("images", food.images || "");
+    }
+  }, [inputType]);
+
   const onSubmit = async (data) => {
     const { ingredients, images } = data;
-    const arrIngredients = ingredients.split(",");
+    const arrIngredients = ingredients?.split(",");
     try {
-      await productService.addProduct({
-        ...data,
-        arrIngredients,
-        images: images[0],
-        sellerId,
-      });
-      navigate("/");
+      if (!food) {
+        await productService.addProduct({
+          ...data,
+          arrIngredients,
+          images: images[0],
+          sellerId,
+          active: false,
+          adminApproval: "pending",
+        });
+        navigate("/seller/products/all");
+      } else {
+        const foodImageUrl = await imagesService.createImageURL(images[0]);
+        await productService.updateFood(food.id, {
+          ...data,
+          images: inputType === "text" ? images : foodImageUrl,
+          ingredients: arrIngredients,
+          active: false,
+          admin_approval: 'pending',
+        });
+        navigate("/seller/products/all");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -223,13 +266,25 @@ export default function ProductListingForm() {
 
           {/* Images */}
           <div>
-            <label className="block font-semibold text-gray-700">Images</label>
+            <label className="flex flex-row gap-2 font-semibold text-gray-700">
+              Images{" "}
+              <span
+                onClick={handleImagesUpdate}
+                className={`border rounded text-sm mb-2 p-0.5 ${
+                  food ? "block" : "hidden"
+                }`}
+              >
+                {inputType === "text"
+                  ? "Upload New Photo ?"
+                  : "Keep Previous One ?"}
+              </span>
+            </label>
             <input
               {...register("images", {
                 required: "At least one image is required",
               })}
               className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-              type="file"
+              type={food ? `${inputType}` : "file"}
             />
             {errors.images && (
               <p className="text-red-500 text-sm mt-1">
@@ -245,7 +300,7 @@ export default function ProductListingForm() {
             type="submit"
             className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 shadow-md transition"
           >
-            Submit Product
+            {!food ? " Submit Product" : "Update Product"}
           </button>
         </div>
       </form>
