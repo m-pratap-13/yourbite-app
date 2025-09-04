@@ -45,13 +45,13 @@ function Sidebar() {
     },
     {
       name: "Customers",
-      slug: "/admin/customers",
+      slug: "/admin/customers/all",
       active: authStatus && userRole === "admin",
       icon: <FiUsers />,
     },
     {
       name: "Sellers",
-      slug: "/admin/sellers",
+      slug: "/admin/sellers/all",
       active: authStatus && userRole === "admin",
       icon: <FiUserCheck />,
     },
