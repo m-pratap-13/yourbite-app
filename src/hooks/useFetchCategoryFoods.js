@@ -11,7 +11,7 @@ function useFetchCategoryFoods(categoryName) {
       try {
         const data = await productService.getCategoryProducts(categoryName);
         const activeItems = (data || []).filter(
-          (item) => item.active && item.admin_approval
+          (item) => item.active && item.admin_approval === "approved"
         );
         setCategoryFoods(activeItems);
       } catch (err) {
