@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import authService from "../../supabase/supabaseAuth";
 import { setUser } from "../../features/authSlice";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -15,6 +17,7 @@ const LoginForm = () => {
   } = useForm();
 
   const onSubmit = async (formData) => {
+    setLoading(true);
     try {
       const { user } = await authService.login(formData);
       if (user) {
@@ -27,7 +30,9 @@ const LoginForm = () => {
 
       navigate("/");
     } catch (error) {
-      alert("Login failed: " + error.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,9 +87,15 @@ const LoginForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition duration-200"
+          disabled={loading}
+          className={`w-full font-bold py-2 px-4 rounded-md transition duration-200
+            ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700 text-white"
+            }`}
         >
-          Login
+          {loading ? "Logging in..." : "Login"} 
         </button>
       </form>
       <div className="text-center text-sm text-gray-700 mt-6">

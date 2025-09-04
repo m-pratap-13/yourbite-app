@@ -3,10 +3,13 @@ import authService from "../../supabase/supabaseAuth";
 import { useDispatch } from "react-redux";
 import { setUser, setUserRole } from "../../features/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const SellerSignUpForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -14,7 +17,7 @@ const SellerSignUpForm = () => {
   } = useForm();
 
   const onSubmit = async (formData) => {
-    console.log(formData);
+    setLoading(true);
     const { profileImage, shopImage } = formData;
 
     try {
@@ -33,7 +36,9 @@ const SellerSignUpForm = () => {
         }
       }
     } catch (error) {
-      console.error("Signup error", error.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -296,9 +301,15 @@ const SellerSignUpForm = () => {
         <div className="text-right pt-4">
           <button
             type="submit"
-            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+            disabled={loading}
+            className={`px-6 py-2 rounded-md transition
+          ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>

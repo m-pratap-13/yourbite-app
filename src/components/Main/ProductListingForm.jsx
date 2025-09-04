@@ -9,6 +9,7 @@ export default function ProductListingForm({ food }) {
   const sellerId = useSelector((state) => state.auth.currentUser.id);
   const navigate = useNavigate();
   const [inputType, setInputType] = useState("text");
+  const [loading, setLoading] = useState(false);
 
   const handleImagesUpdate = () => {
     setInputType((prev) => (prev === "text" ? "file" : "text"));
@@ -44,6 +45,7 @@ export default function ProductListingForm({ food }) {
   }, [inputType]);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const { ingredients, images } = data;
     const arrIngredients = ingredients?.split(",");
     try {
@@ -64,12 +66,14 @@ export default function ProductListingForm({ food }) {
           images: inputType === "text" ? images : foodImageUrl,
           ingredients: arrIngredients,
           active: false,
-          admin_approval: 'pending',
+          admin_approval: "pending",
         });
         navigate("/seller/products/all");
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -298,9 +302,21 @@ export default function ProductListingForm({ food }) {
         <div className="md:col-span-2 text-center mt-6">
           <button
             type="submit"
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 shadow-md transition"
+            disabled={loading}
+            className={`px-8 py-3 rounded-lg font-semibold shadow-md transition 
+              ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
+              }`}
           >
-            {!food ? " Submit Product" : "Update Product"}
+            {loading
+              ? !food
+                ? "Submitting..."
+                : "Updating..."
+              : !food
+              ? "Submit Product"
+              : "Update Product"}
           </button>
         </div>
       </form>

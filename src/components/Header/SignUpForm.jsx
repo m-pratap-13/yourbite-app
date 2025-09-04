@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { setUser, setUserRole } from "../../features/authSlice";
 function SignUpForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ function SignUpForm() {
   const onSubmit = async (formData) => {
     const { email, password, name, profileImage } = formData;
 
+    setLoading(true);
     try {
       const user = await authService.createAccount({
         email,
@@ -26,6 +29,7 @@ function SignUpForm() {
         role: "customer",
         profileImage: profileImage[0],
       });
+
       if (user) {
         const userData = await authService.getCurrentUser();
         if (userData) {
@@ -36,6 +40,8 @@ function SignUpForm() {
       }
     } catch (error) {
       console.error("Signup error", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -133,9 +139,15 @@ function SignUpForm() {
         <div>
           <button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition duration-200"
+            disabled={loading}
+            className={`w-full font-bold py-2 px-4 rounded-md transition duration-200 
+              ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-600 hover:bg-green-700 text-white"
+              }`}
           >
-            Sign Up
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
         </div>
       </form>
