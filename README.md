@@ -65,11 +65,9 @@ To add:
 2. Save it in the `/public/screenshots/` folder
 3. Add like this:
 
-```markdown
 ![Admin POV](public/screenshots/admin-pov.png)
 ![Seller POV](public/screenshots/seller-pov.png)
 ![Customer POV](public/screenshots/customer-pov.png)
-```
 
 ---
 
