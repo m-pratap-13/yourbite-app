@@ -12,7 +12,7 @@ It simulates a food delivery web application where users can browse menus, searc
 - Search and filter menu items
 - Add to cart & manage items
 - Responsive design for all devices
-- Separate dashboards for **Admin, Seller, Customer, and Delivery Boy** to manage their respective features  
+- Separate dashboards for **Admin, Seller, Customer, and Delivery Boy** to manage their respective features
 
 ---
 
@@ -64,10 +64,12 @@ To add:
 1. Take a screenshot
 2. Save it in the `/public/screenshots/` folder
 3. Add like this:
-
-![Admin POV](public/screenshots/admin-pov.png)
-![Seller POV](public/screenshots/seller-pov.png)
-![Customer POV](public/screenshots/customer-pov.png)
+   _Admin dashboard interface for managing food listings and users._
+   ![Admin POV](public/screenshots/admin-pov.png)
+   _Seller panel for adding, updating, and managing menu items._
+   ![Seller POV](public/screenshots/seller-pov.png)
+   _Customer view for browsing menus, searching food, and placing orders._
+   ![Customer POV](public/screenshots/customer-pov.png)
 
 ---
 
