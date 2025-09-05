@@ -1,12 +1,102 @@
-# React + Vite
+# 🍴 YourBite – Food Delivery Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a **practice project** built to learn and apply **React, Supabase, and Tailwind CSS**.  
+It simulates a food delivery web application where users can browse menus, search food items, and place orders.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- User authentication (Sign up / Log in)
+- Browse food items by category (Veg / Non-Veg)
+- Search and filter menu items
+- Add to cart & manage items
+- Responsive design for all devices
+- Separate dashboards for **Admin, Seller, Customer, and Delivery Boy** to manage their respective features  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Tailwind CSS
+- **Backend:** Supabase (Database & Auth)
+- **Deployment:** Netlify
+
+---
+
+## ⚡ Getting Started
+
+### 1️⃣ Clone the repo
+
+```bash
+git clone https://github.com/m-pratap-13/yourbite-app.git
+cd yourbite-app
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Setup environment variables
+
+Create a `.env` file in the root folder and add your Supabase credentials:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 4️⃣ Run locally
+
+```bash
+npm run dev
+```
+
+---
+
+## 📸 Screenshots
+
+_Add screenshots of your app here._  
+To add:
+
+1. Take a screenshot
+2. Save it in the `/public/screenshots/` folder
+3. Add like this:
+
+```markdown
+![Admin POV](public/screenshots/admin-pov.png)
+![Seller POV](public/screenshots/seller-pov.png)
+![Customer POV](public/screenshots/customer-pov.png)
+```
+
+---
+
+## 🎯 Purpose of the Project
+
+This is not a production app.  
+It’s a **practice project** to learn:
+
+- React fundamentals & advanced hooks
+- Supabase integration
+- Authentication & authorization
+- State management
+- Deployment process
+
+---
+
+## 📌 Future Improvements
+
+- Payment gateway integration
+- Order tracking
+- Real-time notifications
+- Dark mode support
+
+---
+
+## 🙌 Acknowledgements
+
+- [React](https://react.dev/)
+- [Supabase](https://supabase.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
