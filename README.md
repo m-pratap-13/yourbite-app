@@ -5,7 +5,6 @@ It simulates a food delivery web application where users can browse menus, searc
 
 ---
 ## 🌍 Live Demo 
-
 🔗 [Click here to view the live demo](https://yourbite-app-by-m-pratap-13.netlify.app/)  
 ---
 
@@ -63,13 +62,6 @@ npm run dev
 ---
 
 ## 📸 Screenshots
-
-_Add screenshots of your app here._  
-To add:
-
-1. Take a screenshot
-2. Save it in the `/public/screenshots/` folder
-3. Add like this:
 
 *Admin dashboard interface for managing food listings and users.* 
 
