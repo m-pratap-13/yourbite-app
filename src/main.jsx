@@ -19,6 +19,7 @@ import SellerDashboardPage from "./pages/SellerDashboardPage.jsx";
 import ManageProductsPage from "./pages/ManageProductsPage.jsx";
 import UpdatePage from "./pages/UpdatePage.jsx";
 import AdminReviewPage from "./pages/admin/AdminReviewPage.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
           {
             path: "/admin/:pageType",
             element: <AdminReviewPage />,
+          },
+          {
+            path: "search/:query",
+            element: <SearchPage />,
           },
         ],
       },

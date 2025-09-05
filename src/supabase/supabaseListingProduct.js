@@ -220,6 +220,21 @@ export class ProductService {
       throw error;
     }
   }
+
+  async searchFoods(searchInput) {
+    const { data, error } = await supabase
+      .from("foods")
+      .select("*")
+      .or(
+        `title.ilike.%${searchInput}%,category.ilike.%${searchInput}%,type.ilike.%${searchInput}%`
+      );
+
+    if (error) {
+      console.error("Search error:", error.message);
+      return [];
+    }
+    return data;
+  }
 }
 
 const productService = new ProductService();
