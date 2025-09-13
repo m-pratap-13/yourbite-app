@@ -1,8 +1,9 @@
 import { FaTag, FaTruck, FaRupeeSign } from "react-icons/fa";
 
 export default function CartPrice({ cartFoods }) {
-
-  const cartPrices = cartFoods.map((food) => Number(food.foods.price));
+  const cartPrices = cartFoods.map((food) =>
+    Number(food.foods.price * food.quantity)
+  );
   const totalCartPrice = cartPrices
     .reduce((acc, price) => acc + price, 0)
     .toFixed(2);

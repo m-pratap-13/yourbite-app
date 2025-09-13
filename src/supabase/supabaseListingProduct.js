@@ -50,8 +50,9 @@ export class ProductService {
     try {
       const { data, error } = await supabase.from("carts").insert([
         {
-          id: userId,
+          user_id: userId,
           food_id: foodId,
+          quantity: 1,
         },
       ]);
 
@@ -98,20 +99,6 @@ export class ProductService {
     return data;
   }
 
-  async getCartFoodsId(userId) {
-    const { data, error } = await supabase
-      .from("carts")
-      .select("*")
-      .eq("id", userId);
-
-    if (error) {
-      console.error("Supabase getSellers error:", error.message);
-      throw error;
-    }
-
-    return data;
-  }
-
   async getCartFoods(userId) {
     try {
       const { data } = await supabase
@@ -124,7 +111,7 @@ export class ProductService {
     )
   `
         )
-        .eq("id", userId);
+        .eq("user_id", userId);
       return data;
     } catch (error) {
       console.log("Supabase getCartFoods error", error);
@@ -132,11 +119,12 @@ export class ProductService {
     }
   }
 
-  async deleteFromCart(userId) {
+  async deleteFromCart(foodId, userId) {
     const { error } = await supabase
       .from("carts")
       .delete()
-      .eq("food_id", userId);
+      .eq("user_id", userId)
+      .eq("food_id", foodId);
 
     if (error) {
       console.error("Supabase deleteFromCart error:", error.message);
@@ -234,6 +222,27 @@ export class ProductService {
       return [];
     }
     return data;
+  }
+
+  async updateCartsQuantity(userId, foodId, updatedQuantity) {
+    try {
+      const { data, error } = await supabase
+        .from("carts")
+        .update({ quantity: updatedQuantity })
+        .eq("user_id", userId)
+        .eq("food_id", foodId)
+        .select();
+
+      if (error) {
+        console.error("Error updating cart:", error.message);
+        return { error };
+      }
+
+      return { data };
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      return { error: err };
+    }
   }
 }
 

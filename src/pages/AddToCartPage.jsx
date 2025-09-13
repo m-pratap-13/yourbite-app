@@ -8,10 +8,9 @@ import ItemCard from "../components/Main/ItemCard";
 
 function AddToCartPage() {
   const userId = useSelector((state) => state.auth.currentUser).id;
-  const { cartFoods, refreshCart } = useFetchCartFoods(userId);
+  const { cartFoods } = useFetchCartFoods(userId);
   const handleRemoveFromCart = async (foodId) => {
-    await productService.deleteFromCart(foodId);
-    refreshCart();
+    await productService.deleteFromCart(foodId, userId);
   };
 
   if (cartFoods.length === 0) {
@@ -27,19 +26,21 @@ function AddToCartPage() {
   return (
     <div className="flex flex-col gap-4 lg:flex-row">
       <div className="flex gap-2 flex-col lg:w-[60%]">
-        {cartFoods.map((food) => (
+        {cartFoods.map((cart) => (
           <ItemCard
-            key={food.foods.id}
-            title={food.foods.title}
-            description={food.foods.description}
-            shipping={food.foods.shippingInformation}
-            category={food.foods.category}
-            price={food.foods.price}
-            type={food.foods.type}
-            stock={food.foods.stock}
-            imageURL={food.foods.images}
-            onRejected={() => handleRemoveFromCart(food.foods.id)}
-            pageType='addToCart'
+            key={cart.foods.id}
+            foodId={cart.foods.id}
+            foodQuantity={cart.quantity}
+            title={cart.foods.title}
+            description={cart.foods.description}
+            shipping={cart.foods.shippingInformation}
+            category={cart.foods.category}
+            price={cart.foods.price}
+            type={cart.foods.type}
+            stock={cart.foods.stock}
+            imageURL={cart.foods.images}
+            onRejected={() => handleRemoveFromCart(cart.foods.id)}
+            pageType="addToCart"
           />
         ))}
       </div>

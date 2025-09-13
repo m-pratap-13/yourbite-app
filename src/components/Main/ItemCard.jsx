@@ -1,10 +1,12 @@
-import {  FiCheck, FiTrash } from "react-icons/fi";
+import { FiCheck, FiTrash } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import useCurrentUserRole from "../../hooks/useCurrentUserRole";
 import Button from "./Button";
 import { RxCross2 } from "react-icons/rx";
+import QuantityButton from "./QuantityButton";
 
 function ItemCard({
+  foodId,
   title,
   description,
   shopName,
@@ -12,6 +14,8 @@ function ItemCard({
   shipping,
   price,
   type,
+  stock,
+  foodQuantity,
   imageURL,
   onApproved,
   onRejected,
@@ -64,6 +68,13 @@ function ItemCard({
         )}
         <p className="text-lg sm:text-xl font-bold text-green-700">₹{price}</p>
       </div>
+      {pageType === "addToCart" && (
+        <QuantityButton
+          foodId={foodId}
+          stock={stock}
+          foodQuantity={foodQuantity}
+        />
+      )}
 
       {userRole === "admin" && (
         <div className="flex gap-2">
